@@ -2,7 +2,7 @@
   <div class="flex flex-col items-center gap-2 w-40">
     <div
       :style="getImageBackgroundStyle()"
-      class="w-40 h-72 bg-cover border-2 border-orange-150 rounded-lg"
+      class="w-full h-72 bg-cover border-2 border-orange-150 rounded-lg"
     />
     <div class="flex flex-col items-center w-max text-lg">
       <p>
