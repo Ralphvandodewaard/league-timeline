@@ -12,7 +12,7 @@
         </span>
       </p>
       <p v-if="!hideDate">
-        {{ event.date }}
+        {{ getFormattedDate() }}
       </p>
     </div>
   </div>
@@ -40,8 +40,21 @@ export default defineComponent({
       return { backgroundImage: `url(${url})` };
     }
 
+    function getFormattedDate(): string {
+      const date = new Date(props.event.date);
+      const options: Intl.DateTimeFormatOptions = {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      };
+      const formattedDate = new Intl.DateTimeFormat('en-UK', options).format(date);
+
+      return formattedDate;
+    }
+
     return {
-      getImageBackgroundStyle
+      getImageBackgroundStyle,
+      getFormattedDate
     };
   }
 });
