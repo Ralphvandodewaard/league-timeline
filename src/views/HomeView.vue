@@ -1,10 +1,17 @@
 <template>
-  <div>
-    <div
-      v-for="event in events"
-      :key="event.id"
-    >
-      {{ event.label }}
+  <div
+    v-if="currentEvent"
+    class="grid grid-rows-2 flex-grow h-full divide-y divide-orange-150"
+  >
+    <div class="flex justify-center items-center">
+      <EventWrapper :event="currentEvent" />
+    </div>
+    <div class="flex justify-center items-center gap-4">
+      <EventWrapper
+        v-for="event in events"
+        :key="event.id"
+        :event="event"
+      />
     </div>
   </div>
 </template>
@@ -12,10 +19,14 @@
 <script lang="ts">
 import { defineComponent, onMounted, Ref, ref } from 'vue';
 import eventsList from '@/assets/events';
+import EventWrapper from '@/components/EventWrapper.vue';
 import { Event } from '@/models/event';
 
 export default defineComponent({
   name: 'HomeView',
+  components: {
+    EventWrapper
+  },
   setup() {
     const events: Ref<Event[]> = ref([]);
 
@@ -47,8 +58,15 @@ export default defineComponent({
       return Math.round(Math.random() * (eventsList.length - 1));
     }
 
+    function getImageBackgroundStyle(id: string): any {
+      const url = `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_0.jpg`;
+      return { backgroundImage: `url(${url})` };
+    }
+
     return {
-      events
+      events,
+      currentEvent,
+      getImageBackgroundStyle
     };
   }
 });
