@@ -69,15 +69,9 @@ export default defineComponent({
       return Math.round(Math.random() * (eventsList.length - 1));
     }
 
-    function getImageBackgroundStyle(id: string): any {
-      const url = `https://ddragon.leagueoflegends.com/cdn/img/champion/loading/${id}_0.jpg`;
-      return { backgroundImage: `url(${url})` };
-    }
-
     return {
       events,
-      currentEvent,
-      getImageBackgroundStyle
+      currentEvent
     };
   }
 });
