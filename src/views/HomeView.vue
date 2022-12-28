@@ -76,7 +76,8 @@ export default defineComponent({
         isAfterPreviousEvent(comparedEvent) &&
         isBeforeNextEvent(comparedIndex)
       ) {
-        console.log('correct');
+        insertCurrentEventInList(comparedIndex);
+        getCurrentEvent();
       } else {
         console.log('false');
       }
@@ -96,9 +97,20 @@ export default defineComponent({
 
     function guessBeforeAllEvents(): void {
       if (currentEvent.value && getTimeValue(currentEvent.value.date) < getTimeValue(events.value[0].date)) {
-        console.log('correct');
+        insertCurrentEventInList();
+        getCurrentEvent();
       } else {
         console.log('false');
+      }
+    }
+
+    function insertCurrentEventInList(comparedIndex?: number): void {
+      if (currentEvent.value) {
+        if (typeof comparedIndex === 'number') {
+          events.value.splice(comparedIndex + 1, 0, currentEvent.value);
+        } else {
+          events.value.unshift(currentEvent.value);
+        }
       }
     }
 
