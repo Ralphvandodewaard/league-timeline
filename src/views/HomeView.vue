@@ -6,7 +6,8 @@
     <div class="flex justify-center items-center">
       <EventWrapper
         :event="currentEvent"
-        :hide-date="true"
+        :hide-date="!guessedEventId"
+        :is-correct="isCorrect"
       >
         <NextButton
           v-if="guessedEventId"

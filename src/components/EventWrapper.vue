@@ -13,7 +13,12 @@
           {{ event.label }}
         </span>
       </p>
-      <p v-if="!hideDate">
+      <p
+        :class="[
+          hideDate ? 'opacity-0' : 'opacity-100',
+          getTextColorClass
+        ]"
+      >
         {{ getFormattedDate() }}
       </p>
     </div>
@@ -21,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, computed } from 'vue';
 import { Event } from '@/models/event';
 
 export default defineComponent({
@@ -34,6 +39,10 @@ export default defineComponent({
     hideDate: {
       type: Boolean,
       default: false
+    },
+    isCorrect: {
+      type: Boolean || null,
+      default: null
     }
   },
   setup(props) {
@@ -54,9 +63,18 @@ export default defineComponent({
       return formattedDate;
     }
 
+    const getTextColorClass = computed<string>(() => {
+      if (typeof props.isCorrect === 'boolean') {
+        return props.isCorrect ? 'text-green-400' : 'text-red-400';
+      } else {
+        return '';
+      }
+    });
+
     return {
       getImageBackgroundStyle,
-      getFormattedDate
+      getFormattedDate,
+      getTextColorClass
     };
   }
 });
