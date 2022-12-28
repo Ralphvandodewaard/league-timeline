@@ -745,6 +745,234 @@ const events: Event[] = [
     label: 'Syndra',
     type: types.champion,
     date: '2012-09-13'
+  },
+  {
+    id: 'TahmKench',
+    label: 'Tahm Kench',
+    type: types.champion,
+    date: '2015-07-09'
+  },
+  {
+    id: 'Taliyah',
+    label: 'Taliyah',
+    type: types.champion,
+    date: '2016-05-18'
+  },
+  {
+    id: 'Talon',
+    label: 'Talon',
+    type: types.champion,
+    date: '2011-08-24'
+  },
+  {
+    id: 'Taric',
+    label: 'Taric',
+    type: types.champion,
+    date: '2009-08-19'
+  },
+  {
+    id: 'Teemo',
+    label: 'Teemo',
+    type: types.champion,
+    date: '2009-02-21'
+  },
+  {
+    id: 'Thresh',
+    label: 'Thresh',
+    type: types.champion,
+    date: '2013-01-23'
+  },
+  {
+    id: 'Tristana',
+    label: 'Tristana',
+    type: types.champion,
+    date: '2009-02-21'
+  },
+  {
+    id: 'Trundle',
+    label: 'Trundle',
+    type: types.champion,
+    date: '2010-12-01'
+  },
+  {
+    id: 'Tryndamere',
+    label: 'Tryndamere',
+    type: types.champion,
+    date: '2009-05-01'
+  },
+  {
+    id: 'TwistedFate',
+    label: 'Twisted Fate',
+    type: types.champion,
+    date: '2009-02-21'
+  },
+  {
+    id: 'Twitch',
+    label: 'Twitch',
+    type: types.champion,
+    date: '2009-05-01'
+  },
+  {
+    id: 'Udyr',
+    label: 'Udyr',
+    type: types.champion,
+    date: '2009-12-02'
+  },
+  {
+    id: 'Urgot',
+    label: 'Urgot',
+    type: types.champion,
+    date: '2010-08-24'
+  },
+  {
+    id: 'Varus',
+    label: 'Varus',
+    type: types.champion,
+    date: '2012-05-08'
+  },
+  {
+    id: 'Vayne',
+    label: 'Vayne',
+    type: types.champion,
+    date: '2011-05-10'
+  },
+  {
+    id: 'Veigar',
+    label: 'Veigar',
+    type: types.champion,
+    date: '2009-07-24'
+  },
+  {
+    id: 'Velkoz',
+    label: "Vel'koz",
+    type: types.champion,
+    date: '2014-02-27'
+  },
+  {
+    id: 'Vex',
+    label: 'Vex',
+    type: types.champion,
+    date: '2021-09-23'
+  },
+  {
+    id: 'Vi',
+    label: 'Vi',
+    type: types.champion,
+    date: '2012-12-19'
+  },
+  {
+    id: 'Viego',
+    label: 'Viego',
+    type: types.champion,
+    date: '2021-01-21'
+  },
+  {
+    id: 'Viktor',
+    label: 'Viktor',
+    type: types.champion,
+    date: '2011-12-29'
+  },
+  {
+    id: 'Vladimir',
+    label: 'Vladimir',
+    type: types.champion,
+    date: '2010-07-27'
+  },
+  {
+    id: 'Volibear',
+    label: 'Volibear',
+    type: types.champion,
+    date: '2011-11-29'
+  },
+  {
+    id: 'Warwick',
+    label: 'Warwick',
+    type: types.champion,
+    date: '2009-02-21'
+  },
+  {
+    id: 'Xayah',
+    label: 'Xayah',
+    type: types.champion,
+    date: '2017-04-19'
+  },
+  {
+    id: 'Xerath',
+    label: 'Xerath',
+    type: types.champion,
+    date: '2011-10-05'
+  },
+  {
+    id: 'XinZhao',
+    label: 'Xin Zhao',
+    type: types.champion,
+    date: '2010-07-13'
+  },
+  {
+    id: 'Yasuo',
+    label: 'Yasuo',
+    type: types.champion,
+    date: '2013-12-13'
+  },
+  {
+    id: 'Yone',
+    label: 'Yone',
+    type: types.champion,
+    date: '2020-08-06'
+  },
+  {
+    id: 'Yorick',
+    label: 'Yorick',
+    type: types.champion,
+    date: '2011-06-22'
+  },
+  {
+    id: 'Yuumi',
+    label: 'Yuumi',
+    type: types.champion,
+    date: '2019-05-14'
+  },
+  {
+    id: 'Zac',
+    label: 'Zac',
+    type: types.champion,
+    date: '2013-03-29'
+  },
+  {
+    id: 'Zed',
+    label: 'Zed',
+    type: types.champion,
+    date: '2012-11-13'
+  },
+  {
+    id: 'Zeri',
+    label: 'Zeri',
+    type: types.champion,
+    date: '2022-01-20'
+  },
+  {
+    id: 'Ziggs',
+    label: 'Ziggs',
+    type: types.champion,
+    date: '2012-02-01'
+  },
+  {
+    id: 'Zilean',
+    label: 'Zilean',
+    type: types.champion,
+    date: '2009-04-18'
+  },
+  {
+    id: 'Zoe',
+    label: 'Zoe',
+    type: types.champion,
+    date: '2017-11-21'
+  },
+  {
+    id: 'Zyra',
+    label: 'Zyra',
+    type: types.champion,
+    date: '2012-07-24'
   }
 ];
 
