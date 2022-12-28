@@ -4,7 +4,10 @@
     class="grid grid-rows-2 flex-grow h-full divide-y divide-orange-150"
   >
     <div class="flex justify-center items-center">
-      <EventWrapper :event="currentEvent" />
+      <EventWrapper
+        :event="currentEvent"
+        :hide-date="true"
+      />
     </div>
     <div class="flex justify-center items-center gap-4">
       <EventWrapper

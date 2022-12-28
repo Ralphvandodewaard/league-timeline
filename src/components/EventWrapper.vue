@@ -11,7 +11,7 @@
           {{ event.label }}
         </span>
       </p>
-      <p>
+      <p v-if="!hideDate">
         {{ event.date }}
       </p>
     </div>
@@ -28,6 +28,10 @@ export default defineComponent({
     event: {
       type: Object as PropType<Event>,
       required: true
+    },
+    hideDate: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props) {
