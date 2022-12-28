@@ -1,5 +1,5 @@
 const types = {
-  champion: 'champion'
+  champion: 'Champion release'
 };
 
 export default types;
