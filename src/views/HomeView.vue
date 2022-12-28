@@ -43,6 +43,10 @@
       </div>
     </div>
   </div>
+  <ScoreWrapper
+    :score="score"
+    :high-score="highScore"
+  />
 </template>
 
 <script lang="ts">
@@ -57,6 +61,7 @@ import eventsList from '@/assets/events';
 import EventWrapper from '@/components/EventWrapper.vue';
 import BeforeAfterButton from '@/components/BeforeAfterButton.vue';
 import NextButton from '@/components/NextButton.vue';
+import ScoreWrapper from '@/components/ScoreWrapper.vue';
 import { Event } from '@/models/event';
 
 export default defineComponent({
@@ -64,7 +69,8 @@ export default defineComponent({
   components: {
     EventWrapper,
     BeforeAfterButton,
-    NextButton
+    NextButton,
+    ScoreWrapper
   },
   setup() {
     const events: Ref<Event[]> = ref([]);
@@ -75,7 +81,12 @@ export default defineComponent({
 
     const guessedEventId = ref('');
 
+    const score = ref(0);
+
+    const highScore = ref(0);
+
     onMounted(() => {
+      getHighScore();
       getFirstEvent();
       getCurrentEvent();
     });
@@ -129,8 +140,11 @@ export default defineComponent({
 
     function next(): void {
       if (isCorrect.value) {
+        score.value++;
         insertCurrentEventInList();
       } else {
+        setHighScore();
+        score.value = 0;
         events.value = [];
         getFirstEvent();
       }
@@ -151,6 +165,17 @@ export default defineComponent({
       }
     }
 
+    function getHighScore(): void {
+      highScore.value = Number(localStorage.getItem('league-timeline-high-score')) || 0;
+    }
+
+    function setHighScore(): void {
+      if (score.value > 0 && score.value > highScore.value) {
+        highScore.value = score.value;
+        localStorage.setItem('league-timeline-high-score', highScore.value.toString());
+      }
+    }
+
     return {
       events,
       currentEvent,
@@ -158,7 +183,9 @@ export default defineComponent({
       guessEvent,
       guessedEventId,
       isCorrect,
-      next
+      next,
+      score,
+      highScore
     };
   }
 });
