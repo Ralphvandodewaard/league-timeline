@@ -12,7 +12,7 @@
         <NextButton
           v-if="guessedEventId"
           :is-correct="isCorrect"
-          class="absolute -right-40"
+          class="absolute -right-28 sm:-right-40"
           @click="next()"
         />
       </EventWrapper>

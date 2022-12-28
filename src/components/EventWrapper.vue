@@ -1,12 +1,12 @@
 <template>
-  <div class="flex flex-col items-center gap-2 w-40">
+  <div class="flex flex-col items-center gap-2 w-28 sm:w-40">
     <div
       :style="getImageBackgroundStyle()"
-      class="relative flex items-center w-full h-72 bg-cover border-2 border-orange-150 rounded-lg"
+      class="relative flex items-center w-full h-52 sm:h-72 bg-cover border-2 border-orange-150 rounded-lg"
     >
       <slot />
     </div>
-    <div class="flex flex-col items-center w-max text-lg">
+    <div class="flex flex-col items-center w-max sm:text-lg">
       <p>
         {{  event.type }}:
         <span class="font-semibold">

@@ -1,12 +1,12 @@
 <template>
   <div class="absolute top-4 left-4 sm:top-8 sm:left-8 flex flex-col">
-    <p>
+    <p class="text-sm sm:text-base">
       High score:
       <span class="font-semibold">
         {{ highScore }}
       </span>
     </p>
-    <p class="text-lg">
+    <p class="sm:text-lg">
       Score:
       <span class="font-semibold">
         {{ score }}

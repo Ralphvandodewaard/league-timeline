@@ -1,7 +1,7 @@
 <template>
   <button
     :class="isCorrect ? 'text-green-400 border-green-400' : 'text-red-400 border-red-400'"
-    class="flex justify-center items-center w-32 py-2 text-lg font-semibold border-2 rounded-lg"
+    class="flex justify-center items-center w-24 sm:w-32 py-2 sm:text-lg font-semibold border-2 rounded-lg"
   >
     <p v-if="isCorrect">
       Next

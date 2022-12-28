@@ -2,7 +2,7 @@
   <button
     :disabled="hasGuessed"
     :class="getButtonClasses"
-    class="flex justify-center items-center w-40 h-72 text-lg border-2 border-dashed rounded-lg"
+    class="flex justify-center items-center w-28 sm:w-40 h-52 sm:h-72 sm:text-lg border-2 border-dashed rounded-lg"
   >
     <p v-if="hasGuessed && hasGuessedThisButton && isCorrect">
       Correct!
