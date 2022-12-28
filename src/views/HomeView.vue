@@ -11,14 +11,14 @@
     </div>
     <div class="flex items-center overflow-auto">
       <div class="flex gap-8 mx-auto">
-        <BeforeAfterButton />
+        <BeforeAfterButton @click="guessBeforeAllEvents()" />
         <div
           v-for="event in events"
           :key="event.id"
           class="flex gap-8"
         >
           <EventWrapper :event="event" />
-          <BeforeAfterButton />
+          <BeforeAfterButton @click="guessAfterEvent(event)" />
         </div>
       </div>
     </div>
@@ -69,9 +69,44 @@ export default defineComponent({
       return Math.round(Math.random() * (eventsList.length - 1));
     }
 
+    function guessAfterEvent(comparedEvent: Event): void {
+      const comparedIndex = events.value.findIndex((event: Event) => event.id === comparedEvent.id);
+
+      if (
+        isAfterPreviousEvent(comparedEvent) &&
+        isBeforeNextEvent(comparedIndex)
+      ) {
+        console.log('correct');
+      } else {
+        console.log('false');
+      }
+    }
+
+    function isAfterPreviousEvent(comparedEvent: Event): boolean {
+      return currentEvent.value ? getTimeValue(currentEvent.value.date) > getTimeValue(comparedEvent.date) : false;
+    }
+
+    function isBeforeNextEvent(comparedIndex: number): boolean {
+      return currentEvent.value && comparedIndex + 1 < events.value.length ? getTimeValue(currentEvent.value.date) < getTimeValue(events.value[comparedIndex + 1].date) : true;
+    }
+
+    function getTimeValue(date: string): number {
+      return new Date(date).valueOf();
+    }
+
+    function guessBeforeAllEvents(): void {
+      if (currentEvent.value && getTimeValue(currentEvent.value.date) < getTimeValue(events.value[0].date)) {
+        console.log('correct');
+      } else {
+        console.log('false');
+      }
+    }
+
     return {
       events,
-      currentEvent
+      currentEvent,
+      guessAfterEvent,
+      guessBeforeAllEvents
     };
   }
 });
