@@ -9,16 +9,18 @@
         :hide-date="true"
       />
     </div>
-    <div class="flex items-center overflow-auto">
-      <div class="flex gap-8 mx-auto">
-        <BeforeAfterButton @click="guessBeforeAllEvents()" />
-        <div
-          v-for="event in events"
-          :key="event.id"
-          class="flex gap-8"
-        >
-          <EventWrapper :event="event" />
-          <BeforeAfterButton @click="guessAfterEvent(event)" />
+    <div class="flex items-center overflow-hidden">
+      <div class="flex flex-grow pb-4 overflow-x-scroll">
+        <div class="flex gap-8 mx-auto">
+          <BeforeAfterButton @click="guessBeforeAllEvents()" />
+          <div
+            v-for="event in events"
+            :key="event.id"
+            class="flex gap-8"
+          >
+            <EventWrapper :event="event" />
+            <BeforeAfterButton @click="guessAfterEvent(event)" />
+          </div>
         </div>
       </div>
     </div>
@@ -123,3 +125,17 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="css">
+div::-webkit-scrollbar {
+  @apply h-2;
+}
+
+div::-webkit-scrollbar-track {
+  @apply bg-gray-900 rounded-lg;
+}
+
+div::-webkit-scrollbar-thumb {
+  @apply bg-orange-150 rounded-lg;
+}
+</style>
