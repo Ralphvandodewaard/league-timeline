@@ -9,8 +9,8 @@
         :hide-date="true"
       />
     </div>
-    <div class="flex justify-center items-center">
-      <div class="flex gap-8">
+    <div class="flex items-center overflow-auto">
+      <div class="flex gap-8 mx-auto">
         <BeforeAfterButton />
         <div
           v-for="event in events"
