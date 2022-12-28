@@ -7,19 +7,36 @@
       <EventWrapper
         :event="currentEvent"
         :hide-date="true"
-      />
+      >
+        <NextButton
+          v-if="guessedEventId"
+          :is-correct="isCorrect"
+          class="absolute -right-40"
+          @click="next()"
+        />
+      </EventWrapper>
     </div>
     <div class="flex items-center overflow-hidden">
       <div class="flex flex-grow pb-4 overflow-x-scroll">
         <div class="flex gap-8 mx-auto">
-          <BeforeAfterButton @click="guessBeforeAllEvents()" />
+          <BeforeAfterButton
+            id="BeforeAllEvents"
+            :correct-event-id="correctEventId"
+            :guessed-event-id="guessedEventId"
+            @click="guessEvent('BeforeAllEvents')"
+          />
           <div
             v-for="event in events"
             :key="event.id"
             class="flex gap-8"
           >
             <EventWrapper :event="event" />
-            <BeforeAfterButton @click="guessAfterEvent(event)" />
+            <BeforeAfterButton
+              :id="event.id"
+              :correct-event-id="correctEventId"
+              :guessed-event-id="guessedEventId"
+              @click="guessEvent(event.id)"
+            />
           </div>
         </div>
       </div>
@@ -28,22 +45,34 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, Ref, ref } from 'vue';
+import {
+  defineComponent,
+  onMounted,
+  Ref,
+  ref,
+  computed
+} from 'vue';
 import eventsList from '@/assets/events';
 import EventWrapper from '@/components/EventWrapper.vue';
 import BeforeAfterButton from '@/components/BeforeAfterButton.vue';
+import NextButton from '@/components/NextButton.vue';
 import { Event } from '@/models/event';
 
 export default defineComponent({
   name: 'HomeView',
   components: {
     EventWrapper,
-    BeforeAfterButton
+    BeforeAfterButton,
+    NextButton
   },
   setup() {
     const events: Ref<Event[]> = ref([]);
 
     const currentEvent: Ref<Event | null> = ref(null);
+
+    const correctEventId = ref('');
+
+    const guessedEventId = ref('');
 
     onMounted(() => {
       getFirstEvent();
@@ -56,6 +85,7 @@ export default defineComponent({
 
     function getCurrentEvent(): void {
       currentEvent.value = getRandomEvent();
+      correctEventId.value = getCorrectEventId();
     }
 
     function getRandomEvent(): Event {
@@ -71,18 +101,13 @@ export default defineComponent({
       return Math.round(Math.random() * (eventsList.length - 1));
     }
 
-    function guessAfterEvent(comparedEvent: Event): void {
-      const comparedIndex = events.value.findIndex((event: Event) => event.id === comparedEvent.id);
+    function getCorrectEventId(): string {
+      const correctEvent = events.value.find((comparedEvent: Event) => {
+        const comparedIndex = events.value.findIndex((event: Event) => event.id === comparedEvent.id);
+        return isAfterPreviousEvent(comparedEvent) && isBeforeNextEvent(comparedIndex);
+      });
 
-      if (
-        isAfterPreviousEvent(comparedEvent) &&
-        isBeforeNextEvent(comparedIndex)
-      ) {
-        insertCurrentEventInList(comparedIndex);
-        getCurrentEvent();
-      } else {
-        console.log('false');
-      }
+      return correctEvent ? correctEvent.id : 'BeforeAllEvents';
     }
 
     function isAfterPreviousEvent(comparedEvent: Event): boolean {
@@ -97,30 +122,42 @@ export default defineComponent({
       return new Date(date).valueOf();
     }
 
-    function guessBeforeAllEvents(): void {
-      if (currentEvent.value && getTimeValue(currentEvent.value.date) < getTimeValue(events.value[0].date)) {
-        insertCurrentEventInList();
-        getCurrentEvent();
-      } else {
-        console.log('false');
-      }
+    function guessEvent(eventId: string): void {
+      guessedEventId.value = eventId;
     }
 
-    function insertCurrentEventInList(comparedIndex?: number): void {
+    function next(): void {
+      if (isCorrect.value) {
+        insertCurrentEventInList();
+      } else {
+        events.value = [];
+        getFirstEvent();
+      }
+
+      guessedEventId.value = '';
+      getCurrentEvent();
+    }
+
+    const isCorrect = computed<boolean>(() => {
+      return correctEventId.value === guessedEventId.value;
+    });
+
+    function insertCurrentEventInList(): void {
+      const index = events.value.findIndex((event: Event) => event.id === guessedEventId.value);
+
       if (currentEvent.value) {
-        if (typeof comparedIndex === 'number') {
-          events.value.splice(comparedIndex + 1, 0, currentEvent.value);
-        } else {
-          events.value.unshift(currentEvent.value);
-        }
+        events.value.splice(index + 1, 0, currentEvent.value);
       }
     }
 
     return {
       events,
       currentEvent,
-      guessAfterEvent,
-      guessBeforeAllEvents
+      correctEventId,
+      guessEvent,
+      guessedEventId,
+      isCorrect,
+      next
     };
   }
 });

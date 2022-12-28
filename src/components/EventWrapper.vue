@@ -2,8 +2,10 @@
   <div class="flex flex-col items-center gap-2 w-40">
     <div
       :style="getImageBackgroundStyle()"
-      class="w-full h-72 bg-cover border-2 border-orange-150 rounded-lg"
-    />
+      class="relative flex items-center w-full h-72 bg-cover border-2 border-orange-150 rounded-lg"
+    >
+      <slot />
+    </div>
     <div class="flex flex-col items-center w-max text-lg">
       <p>
         {{  event.type }}:
