@@ -4,6 +4,12 @@
     :class="getButtonClasses"
     class="flex justify-center items-center w-28 sm:w-40 h-52 sm:h-72 sm:text-lg border-2 border-dashed rounded-lg"
   >
+    <p
+      v-if="!hasGuessed && score === 0"
+      class="animate-pulse"
+    >
+      {{  getOlderNewerText }}
+    </p>
     <p v-if="hasGuessed && hasGuessedThisButton && isCorrect">
       Correct!
     </p>
@@ -30,6 +36,10 @@ export default defineComponent({
     guessedEventId: {
       type: String,
       default: ''
+    },
+    score: {
+      type: Number,
+      default: 0
     }
   },
   setup(props) {
@@ -57,11 +67,16 @@ export default defineComponent({
       }
     });
 
+    const getOlderNewerText = computed<string>(() => {
+      return props.id === 'BeforeAllEvents' ? 'Older' : 'Newer';
+    });
+
     return {
       getButtonClasses,
       hasGuessed,
       hasGuessedThisButton,
-      isCorrect
+      isCorrect,
+      getOlderNewerText
     };
   }
 });

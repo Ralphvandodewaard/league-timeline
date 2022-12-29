@@ -24,6 +24,7 @@
             id="BeforeAllEvents"
             :correct-event-id="correctEventId"
             :guessed-event-id="guessedEventId"
+            :score="score"
             @click="guessEvent('BeforeAllEvents')"
           />
           <div
@@ -36,6 +37,7 @@
               :id="event.id"
               :correct-event-id="correctEventId"
               :guessed-event-id="guessedEventId"
+              :score="score"
               @click="guessEvent(event.id)"
             />
           </div>
