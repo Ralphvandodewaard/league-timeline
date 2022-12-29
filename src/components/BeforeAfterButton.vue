@@ -10,11 +10,8 @@
     >
       {{  getOlderNewerText }}
     </p>
-    <p v-if="hasGuessed && hasGuessedThisButton && isCorrect">
-      Correct!
-    </p>
-    <p v-if="hasGuessed && hasGuessedThisButton && !isCorrect">
-      Wrong
+    <p v-if="hasGuessed && hasGuessedThisButton">
+      {{  getCorrectWrongText }}
     </p>
   </button>
 </template>
@@ -70,13 +67,16 @@ export default defineComponent({
     const getOlderNewerText = computed<string>(() => {
       return props.id === 'BeforeAllEvents' ? 'Older' : 'Newer';
     });
+    const getCorrectWrongText = computed<string>(() => {
+      return isCorrect.value ? 'Correct!' : 'Wrong';
+    });
 
     return {
       getButtonClasses,
       hasGuessed,
       hasGuessedThisButton,
-      isCorrect,
-      getOlderNewerText
+      getOlderNewerText,
+      getCorrectWrongText
     };
   }
 });
